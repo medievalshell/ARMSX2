@@ -1,4 +1,4 @@
-package kr.co.iefriends.pcsx2.input.view;
+package kr.co.iefriends.pcsx2.core.input.view;
 
 import android.content.Context;
 import android.graphics.Canvas;

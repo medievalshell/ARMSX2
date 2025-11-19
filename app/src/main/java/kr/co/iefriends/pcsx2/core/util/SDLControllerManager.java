@@ -1,4 +1,4 @@
-package kr.co.iefriends.pcsx2.utils;
+package kr.co.iefriends.pcsx2.core.util;
 
 import android.content.Context;
 import android.os.Build;

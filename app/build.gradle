@@ -146,6 +146,7 @@ android {
 
     sourceSets {
         main {
+            java.srcDirs += ['src/main/java']
             assets.srcDirs += ['../app_icons']
             jniLibs.srcDirs += ['src/main/jniLibs']
             if (enableRN) {

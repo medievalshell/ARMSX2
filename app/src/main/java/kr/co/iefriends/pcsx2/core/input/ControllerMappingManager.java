@@ -1,4 +1,4 @@
-package kr.co.iefriends.pcsx2.input;
+package kr.co.iefriends.pcsx2.core.input;
 
 import android.content.Context;
 import android.content.SharedPreferences;

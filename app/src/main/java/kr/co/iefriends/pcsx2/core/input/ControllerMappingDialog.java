@@ -19,7 +19,7 @@ By MoonPower (Momo-AUX1) GPLv3 License
 
 */
 
-package kr.co.iefriends.pcsx2.input;
+package kr.co.iefriends.pcsx2.core.input;
 
 import android.app.Dialog;
 import android.content.Context;

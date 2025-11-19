@@ -50,7 +50,7 @@
 #define CONCAT2(prefix, class, function)              Java_##prefix##_##class##_##function
 #define SDL_JAVA_INTERFACE(function)                  CONCAT1(SDL_JAVA_PREFIX, SDLActivity, function)
 #define SDL_JAVA_AUDIO_INTERFACE(function)            CONCAT1(SDL_JAVA_PREFIX, SDLAudioManager, function)
-#define SDL_JAVA_CONTROLLER_INTERFACE(function)       CONCAT1(SDL_JAVA_PREFIX, SDLControllerManager, function)
+#define SDL_JAVA_CONTROLLER_INTERFACE(function)       CONCAT1(SDL_JAVA_PREFIX, core_util_SDLControllerManager, function)
 #define SDL_JAVA_INTERFACE_INPUT_CONNECTION(function) CONCAT1(SDL_JAVA_PREFIX, SDLInputConnection, function)
 
 // Audio encoding definitions
@@ -559,7 +559,7 @@ JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved)
 //    register_methods(env, "kr/co/iefriends/pcsx2/SDLActivity", SDLActivity_tab, SDL_arraysize(SDLActivity_tab));
 //    register_methods(env, "kr/co/iefriends/pcsx2/SDLInputConnection", SDLInputConnection_tab, SDL_arraysize(SDLInputConnection_tab));
 //    register_methods(env, "kr/co/iefriends/pcsx2/SDLAudioManager", SDLAudioManager_tab, SDL_arraysize(SDLAudioManager_tab));
-    register_methods(env, "kr/co/iefriends/pcsx2/utils/SDLControllerManager", SDLControllerManager_tab, SDL_arraysize(SDLControllerManager_tab));
+    register_methods(env, "kr/co/iefriends/pcsx2/core/util/SDLControllerManager", SDLControllerManager_tab, SDL_arraysize(SDLControllerManager_tab));
     register_methods(env, "kr/co/iefriends/pcsx2/hid/HIDDeviceManager", HIDDeviceManager_tab, SDL_arraysize(HIDDeviceManager_tab));
 
     return JNI_VERSION_1_4;

@@ -49,16 +49,18 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import kr.co.iefriends.pcsx2.input.ControllerMappingDialog;
-import kr.co.iefriends.pcsx2.utils.DataDirectoryManager;
-import kr.co.iefriends.pcsx2.utils.DiscordBridge;
-import kr.co.iefriends.pcsx2.utils.LogcatRecorder;
+import kr.co.iefriends.pcsx2.core.input.InputManager;
+import kr.co.iefriends.pcsx2.core.util.SettingsUtils;
+import kr.co.iefriends.pcsx2.core.input.ControllerMappingDialog;
+import kr.co.iefriends.pcsx2.core.util.DataDirectoryManager;
+import kr.co.iefriends.pcsx2.core.util.DiscordBridge;
+import kr.co.iefriends.pcsx2.core.util.LogcatRecorder;
 import kr.co.iefriends.pcsx2.NativeApp;
 import kr.co.iefriends.pcsx2.R;
-import kr.co.iefriends.pcsx2.utils.RetroAchievementsBridge;
-import kr.co.iefriends.pcsx2.input.ControllerMappingManager;
-import kr.co.iefriends.pcsx2.utils.DeviceProfiles;
-import kr.co.iefriends.pcsx2.utils.AvatarLoader;
+import kr.co.iefriends.pcsx2.core.util.RetroAchievementsBridge;
+import kr.co.iefriends.pcsx2.core.input.ControllerMappingManager;
+import kr.co.iefriends.pcsx2.core.util.DeviceProfiles;
+import kr.co.iefriends.pcsx2.core.util.AvatarLoader;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -1211,10 +1213,10 @@ public class SettingsActivity extends AppCompatActivity {
 			}
 		} catch (Exception ignored) {}
 		swVibration.setChecked(vibrationEnabled);
-		MainActivity.setVibrationPreference(vibrationEnabled);
+        InputManager.setVibrationPreference(vibrationEnabled);
 		swVibration.setOnCheckedChangeListener((buttonView, isChecked) -> {
 			NativeApp.setSetting("Pad1", "Vibration", "bool", isChecked ? "true" : "false");
-			MainActivity.setVibrationPreference(isChecked);
+            InputManager.setVibrationPreference(isChecked);
 		});
 	}
 

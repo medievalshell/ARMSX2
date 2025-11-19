@@ -19,7 +19,7 @@ By MoonPower (Momo-AUX1) GPLv3 License
 
 */
 
-package kr.co.iefriends.pcsx2.utils;
+package kr.co.iefriends.pcsx2.core.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -42,7 +42,7 @@ import java.io.OutputStream;
 import java.lang.reflect.Method;
 
 public final class DataDirectoryManager {
-    private static final String PREFS = "armsx2";
+    public static final String PREFS = "armsx2";
     private static final String KEY_CUSTOM_PATH = "data_dir_path";
     private static final String KEY_CUSTOM_URI = "data_dir_uri";
     private static final String KEY_PROMPT_DONE = "data_dir_prompt_done";

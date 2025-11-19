@@ -9,8 +9,8 @@ import android.view.Surface;
 import java.io.File;
 import java.lang.ref.WeakReference;
 
-import kr.co.iefriends.pcsx2.activities.MainActivity;
-import kr.co.iefriends.pcsx2.utils.DataDirectoryManager;
+import kr.co.iefriends.pcsx2.core.input.InputManager;
+import kr.co.iefriends.pcsx2.core.util.DataDirectoryManager;
 
 public class NativeApp {
 	static {
@@ -150,7 +150,7 @@ public class NativeApp {
     public static native boolean isFullscreenUIEnabled();
 
     public static void onPadVibration(int padIndex, float large, float small) {
-        MainActivity.requestControllerRumble(large, small);
+        InputManager.requestControllerRumble(large, small);
     }
     
     // Native tools for ISO to CHD conversion (and eventually more soon)
