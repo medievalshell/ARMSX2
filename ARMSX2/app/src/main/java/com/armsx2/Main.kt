@@ -46,6 +46,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.armsx2.events.TestResult
 import com.armsx2.ui.Colors
+import com.armsx2.ui.LauncherScreen
 import com.armsx2.ui.WindowImpl
 import compose.icons.LineAwesomeIcons
 import compose.icons.lineawesomeicons.Android
@@ -123,6 +124,12 @@ class Main: ComponentActivity() {
                 NativeApp.runVMThread(m_szGamefile)
             }
             WindowImpl.toolbarVisible.value = false
+        }
+
+        fun startWithGamePath(path: String) {
+            if (path.isEmpty()) return
+            m_szGamefile = path
+            start()
         }
 
         fun pause() {
@@ -227,6 +234,7 @@ class Main: ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Launcher.init(this)
         surface.value = SurfaceCallbacks(this)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         WindowInsetsControllerCompat(window, window.decorView).let { controller ->
@@ -401,24 +409,15 @@ class Main: ComponentActivity() {
                                     )
                                 }
                             }
-                        } else {
-                            Box(Modifier
-                                .fillMaxSize()
-                                .background(Colors.surface.value)) {
-                                Row {
-                                    Spacer(Modifier.width(20.dp))
-                                    Column(Modifier.fillMaxSize()) {
-                                        Text("Runtime Tests: ", color = Color.Yellow)
-                                        Text("Patch: ${patchTests.value}", color = Color.Yellow)
-                                        Text("ARM64 CodeGen: ${codeGenTests.value}", color = Color.Yellow)
-                                        Text("ARM64 JIT VU: ${vuJitTests.value}", color = Color.Yellow)
-                                        Text("ARM64 JIT EE: ${eeJitTests.value}", color = Color.Yellow)
-                                        Text("VIF UNPACK: ${vifTests.value}", color = Color.Yellow)
-                                        Text("EE Sequences: ${eeSeqTests.value}", color = Color.Yellow)
-                                    }
-                                }
-
+                        } else if (eState.value == EmuState.RENDER_UNSUPPORTED) {
+                            Box(Modifier.align(Alignment.Center)) {
+                                Text(
+                                    "GLES 3.1+ required",
+                                    fontSize = 22.sp, color = Colors.pasx2_blue
+                                )
                             }
+                        } else {
+                            LauncherScreen()
                         }
                     }
                 }
