@@ -1,0 +1,23 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="289dp"
+    android:height="22dp"
+    android:viewportWidth="2890"
+    android:viewportHeight="220">
+
+    <!-- Back perspective trapezoid (widest at bottom) -->
+    <path
+        android:pathData="M213.814,59.24 C214.106,59.0825 214.432,59 214.764,59 L2663.89,59 C2664.19,59 2664.49,59.0684 2664.76,59.2001 L2865.9,156.633 L34.522,156 L213.814,59.24 Z"
+        android:fillColor="#33D9D9D9"
+        android:strokeColor="#33000000"
+        android:strokeWidth="1"/>
+
+    <!-- Middle front face rectangle with rounded bottom -->
+    <path
+        android:pathData="M32.49,95 C32.49,94.45 32.94,94 33.49,94 L2869.25,94 C2869.82,94 2870.27,94.47 2870.25,95.04 C2870.08,99.58 2869.4,118.04 2869.4,128.5 C2869.4,139.18 2863.06,152.64 2861.67,155.47 C2861.5,155.8 2861.16,156 2860.79,156 L33.5,156 C32.95,156 32.49,155.55 32.49,155 L32.49,95 Z"
+        android:fillColor="#33D9D9D9"/>
+
+    <!-- Top surface trapezoid (narrowest at top) -->
+    <path
+        android:pathData="M208.62,0.24 C208.91,0.08 209.24,0 209.56,0 L2671,0 C2671.3,0 2671.59,0.07 2671.86,0.19 L2868.34,93.19 C2870.27,94.11 2869.62,97 2867.48,97 L35.4,97 C33.32,97 32.62,94.22 34.46,93.24 L208.62,0.24 Z"
+        android:fillColor="#33D9D9D9"/>
+</vector>

@@ -1,0 +1,31 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="50dp"
+    android:height="22dp"
+    android:viewportWidth="50"
+    android:viewportHeight="22">
+
+    <!-- Main glass body with left ramp (top-left wedge cut off) -->
+    <path
+        android:pathData="M0,22 L15,1 L50,1 L50,22 Z"
+        android:fillColor="#33D9D9D9"/>
+
+    <!-- Top edge highlight (only on the flat portion after the ramp) -->
+    <path
+        android:pathData="M15,0 L50,0 L50,1.4 L15,1.4 Z"
+        android:fillColor="#66FFFFFF"/>
+
+    <!-- Thin slanted highlight along the ramp -->
+    <path
+        android:pathData="M0,22 L15,1 L16.2,2.0 L1.2,22 Z"
+        android:fillColor="#66FFFFFF"/>
+
+    <!-- Inner gloss band -->
+    <path
+        android:pathData="M12,5 L50,5 L50,8 L12,8 Z"
+        android:fillColor="#22FFFFFF"/>
+
+    <!-- Bottom shadow -->
+    <path
+        android:pathData="M0,20.5 L50,20.5 L50,22 L0,22 Z"
+        android:fillColor="#40000000"/>
+</vector>

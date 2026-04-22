@@ -23,7 +23,8 @@ object WindowImpl {
                 Box(Modifier.weight(1f).background(Color.Transparent)) {
                     content.invoke()
                 }
-                if (Main.eState.value != EmuState.RUNNING || toolbarVisible.value)
+                val s = Main.eState.value
+                if (s == EmuState.PAUSED || (s == EmuState.RUNNING && toolbarVisible.value))
                     ToolbarImpl.Toolbar()
             }
         }

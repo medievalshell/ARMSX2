@@ -2,6 +2,7 @@ package com.armsx2
 
 import android.app.ActivityManager
 import android.content.Context
+import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.os.Process
@@ -119,6 +120,9 @@ class Main: ComponentActivity() {
         }
 
         fun start() {
+            instance?.runOnUiThread {
+                instance?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+            }
             invoke {
                 eState.value = EmuState.RUNNING
                 NativeApp.runVMThread(m_szGamefile)
@@ -129,6 +133,7 @@ class Main: ComponentActivity() {
         fun startWithGamePath(path: String) {
             if (path.isEmpty()) return
             m_szGamefile = path
+            Launcher.markPlayed(path)
             start()
         }
 
@@ -145,6 +150,9 @@ class Main: ComponentActivity() {
         fun stop() {
             NativeApp.shutdown()
             eState.value = EmuState.STOPPED
+            instance?.runOnUiThread {
+                instance?.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_USER
+            }
         }
 
         fun restart() {

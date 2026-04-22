@@ -12,6 +12,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.mutableStateOf
 import androidx.core.content.edit
+import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
 
@@ -20,6 +21,7 @@ object Launcher {
 
     private const val PREFS = "armsx2_launcher"
     private const val KEY_GAMES_FOLDER = "games_folder_uri"
+    private const val KEY_LAST_PLAYED = "last_played"
 
     private val ps2Exts = setOf(
         "iso", "bin", "chd", "cso", "gz", "mdf", "nrg", "elf", "ciso", "bz2", "img", "dump"
@@ -32,6 +34,7 @@ object Launcher {
     val selectedGame = mutableStateOf<GameEntry?>(null)
     val busy = mutableStateOf(false)
     val message = mutableStateOf<String?>(null)
+    val lastPlayed = mutableStateOf<Map<String, Long>>(emptyMap())
 
     private lateinit var prefs: SharedPreferences
     private lateinit var appContext: Context
@@ -59,6 +62,7 @@ object Launcher {
         }
 
         refreshBiosStatus()
+        lastPlayed.value = loadLastPlayed()
 
         val stored = prefs.getString(KEY_GAMES_FOLDER, null)
         if (stored != null) {
@@ -84,6 +88,17 @@ object Launcher {
             addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
         }
         pickBios.launch(intent)
+    }
+
+    fun refreshGames() {
+        val stored = prefs.getString(KEY_GAMES_FOLDER, null) ?: return
+        val uri = Uri.parse(stored)
+        val hasPerm = try {
+            appContext.contentResolver.persistedUriPermissions.any {
+                it.uri == uri && it.isReadPermission
+            }
+        } catch (_: Exception) { false }
+        if (hasPerm) scanGames(uri)
     }
 
     fun openFolderPicker() {
@@ -224,5 +239,39 @@ object Launcher {
 
     private fun sanitizeName(name: String): String {
         return name.replace(Regex("[^A-Za-z0-9._-]"), "_")
+    }
+
+    fun markPlayed(uriString: String) {
+        if (uriString.isEmpty()) return
+        val updated = lastPlayed.value.toMutableMap().also {
+            it[uriString] = System.currentTimeMillis()
+        }
+        lastPlayed.value = updated
+        saveLastPlayed(updated)
+    }
+
+    fun recentGames(max: Int): List<GameEntry> {
+        val map = lastPlayed.value
+        if (map.isEmpty()) return emptyList()
+        return games.value
+            .filter { it.uri.toString() in map }
+            .sortedByDescending { map[it.uri.toString()] ?: 0L }
+            .take(max)
+    }
+
+    private fun loadLastPlayed(): Map<String, Long> {
+        val json = prefs.getString(KEY_LAST_PLAYED, null) ?: return emptyMap()
+        return try {
+            val obj = JSONObject(json)
+            obj.keys().asSequence().associateWith { obj.getLong(it) }
+        } catch (_: Exception) {
+            emptyMap()
+        }
+    }
+
+    private fun saveLastPlayed(map: Map<String, Long>) {
+        val obj = JSONObject()
+        map.forEach { (k, v) -> obj.put(k, v) }
+        prefs.edit { putString(KEY_LAST_PLAYED, obj.toString()) }
     }
 }

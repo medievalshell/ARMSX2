@@ -28,4 +28,23 @@ object Colors {
     val cyan = Color(0x0ff00ffe0)
     val blue = Color(0x0ff0038ff)
     val pink = Color(0x0fffa00ff)
+
+    // Launcher navy background
+    val navyTop = Color(0xFF0C2843)
+    val navyMid = Color(0xFF081E36)
+    val navyBottom = Color(0xFF051326)
+
+    // Accent / active indicator
+    val accentCyan = Color(0xFF2FE8DA)
+
+    // Divider over dock
+    val dockDivider = Color(0x33FFFFFF)
+
+    // Cover placeholder
+    val coverBorder = Color(0xFF0B2A4A)
+    val coverPs2Top = Color(0xFF1A6FD9)
+    val coverPs2Bottom = Color(0xFF0A2F6B)
+    val coverInnerTop = Color(0xFF5B6A85)
+    val coverInnerBottom = Color(0xFF2A3A55)
+    val coverSelectedGlow = Color(0xFF2FE8DA)
 }
